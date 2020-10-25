@@ -11,8 +11,6 @@ This command-line application allows the user to:
 
 ## Prerequisites
 
-* [MySQL](https://www.npmjs.com/package/mysql) NPM package.
-* [InquirerJs](https://www.npmjs.com/package/inquirer/v/0.2.3) NPM package.
 * NodeJS
 
 ## Technologies

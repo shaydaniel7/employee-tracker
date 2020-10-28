@@ -146,7 +146,7 @@ function addEmployee() {
         },
         {
             type: 'input',
-            message: "What is the employee's new role?" + " (" + "Please enter a 'Role ID' number." + ")",
+            message: "What is the employee's new role?" + "(" + "Please enter a 'Role ID' number." + ")",
             name: 'role_id'
         }
 

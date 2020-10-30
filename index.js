@@ -1,6 +1,8 @@
 const mysql = require("mysql");
 const inquirer = require('inquirer');
 const consoletable = require('console.table');
+const chalk = require('chalk');
+
 
 const connection = mysql.createConnection({
     host: "localhost",
@@ -12,7 +14,7 @@ const connection = mysql.createConnection({
 
 connection.connect(function (err) {
     if (err) throw err;
-    console.log("\n" + "***** Welcome to Employee Tracker! *****" + "\n");
+    console.log(chalk.cyanBright.bgYellowBright.bold("\n" + "***** Welcome to Employee Tracker! *****" + "\n"));
     runProgram();
 });
 
@@ -21,7 +23,7 @@ function runProgram() {
         type: "list",
         message: "What action would you like to take?",
         name: "directory",
-        choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add an employee", "Update employee data", "Exit"]
+        choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add an employee", "Update employee role", "Exit"]
 
     })
         .then(response => {
@@ -49,7 +51,7 @@ function runProgram() {
                     updateRole();
                     break;
                 case "Exit":
-                    console.log("\n" + "***** Thank you for using Employee Tracker! *****" + "\n");
+                    console.log(chalk.cyanBright.bgYellowBright.bold("\n" + "***** Thank you for using Employee Tracker! *****" + "\n"));
                     connection.end();
                     break;
             }
@@ -91,12 +93,12 @@ function addDept() {
     })
         .then(function (res) {
             connection.query('INSERT INTO department SET ?', { name: res.Department },
-                
-            function (err, res) {
+
+                function (err, res) {
                     if (err) throw err;
-                    console.log('\n' + '*** Added a new department! ***' + '\n');
+                    console.log(chalk.cyanBright.bgYellowBright.bold('\n' + '*** Added a new department! ***' + '\n'));
                     runProgram();
-            });
+                });
 
         })
 };
@@ -118,20 +120,17 @@ function addRole() {
             message: 'What is the yearly salary for this new role?',
             name: 'Salary'
         }
-
     ])
         .then(function (res) {
             connection.query('INSERT INTO roles SET ?', { Department_ID: res.Department_ID, Title: res.Title, Salary: res.Salary },
 
                 function (err, res) {
                     if (err) throw err;
-                    console.log('\n' + '*** Added a new role! ***' + '\n');
+                    console.log(chalk.cyanBright.bgYellowBright.bold('\n' + '*** Added a new role! ***' + '\n'));
                     runProgram();
                 });
         });
-
 }
-
 function addEmployee() {
     inquirer.prompt([
         {
@@ -156,36 +155,39 @@ function addEmployee() {
 
                 function (err, res) {
                     if (err) throw err;
-                    console.log('\n' + '*** Added a new employee! ***' + '\n');
+                    console.log(chalk.cyanBright.bgYellowBright.bold('\n' + '*** Added a new employee! ***' + '\n'));
                     runProgram();
                 });
         });
-
 }
 
 function updateRole() {
-    inquirer.prompt([
+    inquirer.prompt(
         {
             type: 'input',
-            message: "Which employee's role would you like to update?",
+            message: 'Enter the ID of the employee whose role would you like to update: ',
             name: 'employee'
-        },
-        {
-            type: 'input',
-            message: "What is the employee's new role?",
-            name: 'role'
-        }
-
-    ])
+        })
         .then(function (res) {
-            connection.query('UPDATE employee SET ? WHERE ?', { employee: `${res.employee}` }, { role: `${res.role}` },
+            let newID = res.employee;
 
+    inquirer.prompt(
+        {
+                type: 'input',
+                message: "What is the employee's new Role ID?",
+                name: 'role'
+        })
+        .then(function (res) {
+            let newRole = res.role
+
+            connection.query('UPDATE employee SET Role_ID = ? WHERE ID = ?',
+                [newID, newRole],
                 function (err, res) {
                     if (err) throw err;
-                    console.log("Successfully updated the employee's role!");
+                    console.log(chalk.cyanBright.bgYellowBright.bold('\n' + "*** Successfully updated the employee's Role ID! ***" + '\n'));
                     runProgram();
                 });
         });
+    })
 
 }
-

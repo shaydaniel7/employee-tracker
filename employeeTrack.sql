@@ -25,6 +25,7 @@ create table employee (
     primary key (ID)
 );
 
+
 INSERT INTO department(name) VALUES ("Human Resources"), ("Customer Relations"), ("Accounting"), ("Administration"), ("Sales"), ("Warehouse");
 
 INSERT INTO roles (department_id, title, salary) VALUES (1, "HR Manager", 60000), (2, "Customer Relations Lead", 50000), (2, "Customer Relations", 50000), (3, "Accountant", 50000), (4, "Regional Manager", 70000), (4, "Assistant Regional Manager", 60000), (4, "Receptionist", 40000), (5, "Sales", 60000), (6, "Warehouse Manager", 50000), (6, "Warehouse Worker", 30000);

@@ -23,11 +23,11 @@ This command-line application allows the user to:
 
 ## Screenshot
 
-![Alt text](***.png "Screenshot")
+![Alt text](screenshot.png "Screenshot")
 
 ## Usage
 
-[Here](https://**** "Link to video showing how to use this app") is a short video showing how to use this application.
+[Here](https://drive.google.com/file/d/1ui_RyiiODOdnG46as1o7TZyZWYXCyGo5/view?usp=sharing "Link to video showing how to use this app") is a short video showing how to use this application.
 
 ## Information
 

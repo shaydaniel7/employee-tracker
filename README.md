@@ -13,7 +13,7 @@ This command-line application allows the user to:
 * CSS
 * Javascript
 * NodeJS
-* mySQL
+* MySQL
 
 ### Screenshot
 ![Alt text](screenshot.png "Screenshot")
